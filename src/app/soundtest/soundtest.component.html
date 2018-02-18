@@ -1,0 +1,18 @@
+
+<div>
+  hi I'm soundtest
+</div>
+<table>
+  <tr>
+    <th></th>
+    <th *ngFor="let col of [1, 2, 3, 4]" 
+        [ngClass]="{'beat-header': beat === col}">{{col}}</th>
+  </tr>
+  <tr *ngFor="let note of notes">
+    <th>{{note}}</th>
+    <td *ngFor="let col of [1, 2, 3, 4]">
+      <button (click)="matrixToggle(note, col)" 
+      [ngClass]="{'beat-cell': isEnabled(note, col)}">{{note}}</button>
+    </td>
+  </tr>                       
+</table>
