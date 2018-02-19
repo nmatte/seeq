@@ -37,7 +37,7 @@ export class SoundtestComponent implements OnInit {
   ngOnInit() {
     // create web audio api context
     this.toneMatrix = new ToneMatrix(
-      ['A3', 'C4', 'D4', 'E4', 'G4', 'A4'], 
+      ['A4', 'G4', 'E4', 'D4', 'C4', 'A3', 'G3', 'E3', 'D3', 'C3', 'A2'], 
       [1, 2, 3, 4, 5, 6, 7, 8]
     );
     this.audioCtx = AudioContextService.getAudioContext();
