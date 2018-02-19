@@ -1,19 +1,22 @@
 import { Observable } from "rxjs/Observable";
 
 export class ToneMatrix {
-    notes: string[] = ['A3', 'C4', 'D4', 'E4', 'G4', 'A4']
-    cols = [1, 2, 3, 4];
+    notes: string[];
+    cols: number[];
     matrix: {[beat: number]: { [note: string]: boolean} } = {};
 
-    constructor () {
+    constructor (notes: string[] = ['A3', 'C4', 'D4', 'E4', 'G4', 'A4'],
+                 cols: number[] = [1, 2, 3, 4]) {
+        this.notes = notes;
+        this.cols = cols;
         Observable
             .from(this.cols)
             .subscribe((col: number) => {
-            this.matrix[col - 1] = {};
+                this.matrix[col - 1] = {};
             })
     }
 
-    matrixToggle(note: string, beat: number) {
+    toggle(note: string, beat: number) {
         this.matrix[beat - 1][note] = !this.matrix[beat - 1][note];
     }
 

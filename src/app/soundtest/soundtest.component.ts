@@ -15,7 +15,7 @@ export class SoundtestComponent implements OnInit {
   gain: GainNode;
   audioCtx: AudioContext;
 
-  toneMatrix: ToneMatrix = new ToneMatrix();
+  toneMatrix: ToneMatrix;
   
   private absoluteBeat: number = 1;
   beat: number = 1;
@@ -23,7 +23,7 @@ export class SoundtestComponent implements OnInit {
   constructor() { }
 
   matrixToggle(note: string, beat: number) {
-    this.toneMatrix.matrixToggle(note, beat);
+    this.toneMatrix.toggle(note, beat);
   }
 
   isEnabled(note: string, beat: number) {
@@ -35,15 +35,18 @@ export class SoundtestComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     // create web audio api context
+    this.toneMatrix = new ToneMatrix(
+      ['A3', 'C4', 'D4', 'E4', 'G4', 'A4'], 
+      [1, 2, 3, 4, 5, 6, 7, 8]
+    );
     this.audioCtx = AudioContextService.getAudioContext();
 
     Observable
       .interval(500)
       .do((beat) => {
         this.absoluteBeat = beat + 1;
-        this.beat = this.absoluteBeat % 4 + 1;
+        this.beat = this.absoluteBeat % this.toneMatrix.cols.length + 1;
       })
       .do((beat) => {
         this.toneMatrix.notes.forEach(note => {
