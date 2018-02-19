@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from './note';
+import { Note } from '../audio/note';
 import { NoteHz } from './noteHz';
 import { Observable } from 'rxjs/Rx';
+import { AudioContextService } from '../audio/audio-context.service';
 
 @Component({
   selector: 'app-soundtest',
@@ -29,14 +30,6 @@ export class SoundtestComponent implements OnInit {
     return this.matrix[beat - 1] && this.matrix[beat - 1][note];
   }
 
-  initMatrix() {
-    Observable
-    .from(this.cols)
-    .subscribe((col: number) => {
-      this.matrix[col - 1] = {};
-    })
-  }
-
   getNotesForBeat(beat: number) {
     let notes = this.matrix[beat - 1];
     if (!notes) {
@@ -45,15 +38,13 @@ export class SoundtestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initMatrix();
+    Observable
+    .from(this.cols)
+    .subscribe((col: number) => {
+      this.matrix[col - 1] = {};
+    })
     // create web audio api context
-    if (window.AudioContext) {
-      console.info("found AudioContext");
-      this.audioCtx = new AudioContext();
-    } else if (webkitAudioContext) {
-      console.info("not found AudioContext");
-      this.audioCtx = new webkitAudioContext();
-    }
+    this.audioCtx = AudioContextService.getAudioContext();
 
     Observable
       .interval(500)
@@ -71,12 +62,8 @@ export class SoundtestComponent implements OnInit {
       .subscribe();
   }
 
-  getNote(note: string) {
-    return NoteHz[note];
-  }
-
   playNote(note: string) {
-    new Note(this.getNote(note), 'sine', 0.5)
+    new Note(NoteHz[note], 'sine', 0.5)
       .play(this.audioCtx);
   }
 
