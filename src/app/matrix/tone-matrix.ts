@@ -30,4 +30,9 @@ export class ToneMatrix {
             notes = this.matrix[beat - 1] = {};
         }
     }
+
+    getActiveNotes(beat: number) {
+        return Observable.from(this.notes)
+            .filter(note => this.isEnabled(note, beat));
+    }
 }

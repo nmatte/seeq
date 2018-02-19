@@ -49,10 +49,8 @@ export class SoundtestComponent implements OnInit {
         this.beat = this.absoluteBeat % this.toneMatrix.cols.length + 1;
       })
       .do((beat) => {
-        this.toneMatrix.notes.forEach(note => {
-          if (this.isEnabled(note, this.beat)) {
-            this.playNote(note);
-          }
+        this.toneMatrix.getActiveNotes(this.beat).forEach(note => {
+          this.playNote(note);
         })
       })
       .subscribe();
