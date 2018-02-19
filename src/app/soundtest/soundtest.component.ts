@@ -17,6 +17,8 @@ export class SoundtestComponent implements OnInit {
   audioCtx: AudioContext;
 
   toneMatrix: ToneMatrix;
+  beat$: Observable<number>;
+  beatActive: boolean;
   
   beat: number = 1;
 
@@ -30,18 +32,21 @@ export class SoundtestComponent implements OnInit {
     );
     this.audioCtx = this.audioContextService.getAudioContext();
 
-    this.beatService.getBeat(this.toneMatrix.cols.length)
+    this.beat$ = this.beatService.getBeat(this.toneMatrix.cols.length)
       .do((beat) => {
         this.beat = beat;
         this.toneMatrix.getActiveNotes(beat).forEach(note => {
           new Note(NoteHz[note], 'sine', 0.5).play(this.audioCtx);
         })
-      })
-      .subscribe();
+      });
   }
 
   matrixToggle(note: string, beat: number) {
     this.toneMatrix.toggle(note, beat);
+    if (!this.beatActive) {
+      this.beat$.subscribe();
+      this.beatActive = true;
+    }
   }
 
   isEnabled(note: string, beat: number) {

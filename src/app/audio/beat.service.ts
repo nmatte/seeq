@@ -14,7 +14,7 @@ export class BeatService {
     return Observable
       .interval(500)
       .do((beat) => {
-        this.absoluteBeat = beat + 1;
+        this.absoluteBeat = beat;
       })
       .map((beat) => {
         return (this.absoluteBeat % numBeats) + 1;
