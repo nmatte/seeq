@@ -4,6 +4,7 @@ import { NoteHz } from './noteHz';
 import { Observable } from 'rxjs/Rx';
 import { AudioContextService } from '../audio/audio-context.service';
 import { ToneMatrix } from '../matrix/tone-matrix';
+import { BeatService } from '../audio/beat.service';
 
 @Component({
   selector: 'app-soundtest',
@@ -17,10 +18,27 @@ export class SoundtestComponent implements OnInit {
 
   toneMatrix: ToneMatrix;
   
-  private absoluteBeat: number = 1;
   beat: number = 1;
 
-  constructor(private audioContextService: AudioContextService) { }
+  constructor(private audioContextService: AudioContextService, 
+              private beatService: BeatService) { }
+
+  ngOnInit() {
+    this.toneMatrix = new ToneMatrix(
+      ['A4', 'G4', 'E4', 'D4', 'C4', 'A3', 'G3', 'E3', 'D3', 'C3', 'A2'], 
+      [1, 2, 3, 4, 5, 6, 7, 8]
+    );
+    this.audioCtx = this.audioContextService.getAudioContext();
+
+    this.beatService.getBeat(this.toneMatrix.cols.length)
+      .do((beat) => {
+        this.beat = beat;
+        this.toneMatrix.getActiveNotes(beat).forEach(note => {
+          new Note(NoteHz[note], 'sine', 0.5).play(this.audioCtx);
+        })
+      })
+      .subscribe();
+  }
 
   matrixToggle(note: string, beat: number) {
     this.toneMatrix.toggle(note, beat);
@@ -32,33 +50,6 @@ export class SoundtestComponent implements OnInit {
 
   getNotesForBeat(beat: number) {
     return this.toneMatrix.getNotesForBeat(beat);
-  }
-
-  ngOnInit() {
-    // create web audio api context
-    this.toneMatrix = new ToneMatrix(
-      ['A4', 'G4', 'E4', 'D4', 'C4', 'A3', 'G3', 'E3', 'D3', 'C3', 'A2'], 
-      [1, 2, 3, 4, 5, 6, 7, 8]
-    );
-    this.audioCtx = this.audioContextService.getAudioContext();
-
-    Observable
-      .interval(500)
-      .do((beat) => {
-        this.absoluteBeat = beat + 1;
-        this.beat = this.absoluteBeat % this.toneMatrix.cols.length + 1;
-      })
-      .do((beat) => {
-        this.toneMatrix.getActiveNotes(this.beat).forEach(note => {
-          this.playNote(note);
-        })
-      })
-      .subscribe();
-  }
-
-  playNote(note: string) {
-    new Note(NoteHz[note], 'sine', 0.5)
-      .play(this.audioCtx);
   }
 
 }

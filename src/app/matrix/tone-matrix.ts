@@ -9,6 +9,7 @@ export class ToneMatrix {
                  cols: number[] = [1, 2, 3, 4]) {
         this.notes = notes;
         this.cols = cols;
+        
         Observable
             .from(this.cols)
             .subscribe((col: number) => {

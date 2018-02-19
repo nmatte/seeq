@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SoundtestComponent } from './soundtest/soundtest.component';
 import { AudioContextService } from './audio/audio-context.service';
+import { BeatService } from './audio/beat.service';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { AudioContextService } from './audio/audio-context.service';
   imports: [
     BrowserModule
   ],
-  providers: [AudioContextService],
+  providers: [AudioContextService, BeatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
