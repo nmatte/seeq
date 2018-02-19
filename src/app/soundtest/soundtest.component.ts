@@ -3,6 +3,7 @@ import { Note } from '../audio/note';
 import { NoteHz } from './noteHz';
 import { Observable } from 'rxjs/Rx';
 import { AudioContextService } from '../audio/audio-context.service';
+import { ToneMatrix } from '../matrix/tone-matrix';
 
 @Component({
   selector: 'app-soundtest',
@@ -13,36 +14,28 @@ export class SoundtestComponent implements OnInit {
 
   gain: GainNode;
   audioCtx: AudioContext;
-  notes: string[] = ['A3', 'C4', 'D4', 'E4', 'G4', 'A4']
 
-  cols = [1, 2, 3, 4];
-  matrix: {[beat: number]: { [note: string]: boolean} } = {};
+  toneMatrix: ToneMatrix = new ToneMatrix();
+  
   private absoluteBeat: number = 1;
   beat: number = 1;
 
   constructor() { }
 
   matrixToggle(note: string, beat: number) {
-    this.matrix[beat - 1][note] = !this.matrix[beat - 1][note];
+    this.toneMatrix.matrixToggle(note, beat);
   }
 
   isEnabled(note: string, beat: number) {
-    return this.matrix[beat - 1] && this.matrix[beat - 1][note];
+    return this.toneMatrix.isEnabled(note, beat);
   }
 
   getNotesForBeat(beat: number) {
-    let notes = this.matrix[beat - 1];
-    if (!notes) {
-      notes = this.matrix[beat - 1] = {};
-    }
+    return this.toneMatrix.getNotesForBeat(beat);
   }
 
   ngOnInit() {
-    Observable
-    .from(this.cols)
-    .subscribe((col: number) => {
-      this.matrix[col - 1] = {};
-    })
+    
     // create web audio api context
     this.audioCtx = AudioContextService.getAudioContext();
 
@@ -53,7 +46,7 @@ export class SoundtestComponent implements OnInit {
         this.beat = this.absoluteBeat % 4 + 1;
       })
       .do((beat) => {
-        this.notes.forEach(note => {
+        this.toneMatrix.notes.forEach(note => {
           if (this.isEnabled(note, this.beat)) {
             this.playNote(note);
           }
