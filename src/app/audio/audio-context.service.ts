@@ -5,18 +5,20 @@ let audioContext: AudioContext;
 @Injectable()
 export class AudioContextService {
 
+  private audioContext: AudioContext;
+
   constructor() { }
 
-  public static getAudioContext(): AudioContext {
-    if (audioContext) {
-      return audioContext;
+  public getAudioContext(): AudioContext {
+    if (this.audioContext) {
+      return this.audioContext;
     }
     if (!!AudioContext) {
-      audioContext = new AudioContext();
+      this.audioContext = new AudioContext();
     } else if (!!webkitAudioContext) {
-      audioContext = new webkitAudioContext();
+      this.audioContext = new webkitAudioContext();
     }
-    return audioContext;
+    return this.audioContext;
   }
 
 }

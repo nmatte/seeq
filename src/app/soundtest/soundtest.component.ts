@@ -20,7 +20,7 @@ export class SoundtestComponent implements OnInit {
   private absoluteBeat: number = 1;
   beat: number = 1;
 
-  constructor() { }
+  constructor(private audioContextService: AudioContextService) { }
 
   matrixToggle(note: string, beat: number) {
     this.toneMatrix.toggle(note, beat);
@@ -40,7 +40,7 @@ export class SoundtestComponent implements OnInit {
       ['A4', 'G4', 'E4', 'D4', 'C4', 'A3', 'G3', 'E3', 'D3', 'C3', 'A2'], 
       [1, 2, 3, 4, 5, 6, 7, 8]
     );
-    this.audioCtx = AudioContextService.getAudioContext();
+    this.audioCtx = this.audioContextService.getAudioContext();
 
     Observable
       .interval(500)
