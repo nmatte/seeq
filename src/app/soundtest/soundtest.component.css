@@ -3,5 +3,18 @@
 }
 
 .beat-cell {
-    color: red;
+    outline: none;
+    border: none;
+    color: black;
+    background-color: dodgerblue;
+    padding-left: 20px;
+}
+
+.beat-cell--active {
+    background-color: blue;
+    color: white;
+}
+
+.matrix-table {
+    margin: auto;
 }

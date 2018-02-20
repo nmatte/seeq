@@ -1,4 +1,4 @@
-<table>
+<table class="matrix-table">
   <tr>
     <th></th>
     <th *ngFor="let col of toneMatrix.cols" 
@@ -7,8 +7,9 @@
   <tr *ngFor="let note of toneMatrix.notes">
     <th>{{note}}</th>
     <td *ngFor="let col of toneMatrix.cols">
-      <button (click)="matrixToggle(note, col)" 
-      [ngClass]="{'beat-cell': isEnabled(note, col)}">{{note}}</button>
+      <span (click)="matrixToggle(note, col)" 
+      class="beat-cell"
+      [ngClass]="{'beat-cell--active': isEnabled(note, col)}">&nbsp;</span>
     </td>
   </tr>                       
 </table>
