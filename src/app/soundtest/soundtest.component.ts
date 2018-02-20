@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../audio/note';
-import { NoteHz } from './noteHz';
+import { NoteHz } from '../audio/noteHz';
 import { Observable } from 'rxjs/Rx';
 import { AudioContextService } from '../audio/audio-context.service';
 import { ToneMatrix } from '../matrix/tone-matrix';
