@@ -1,4 +1,4 @@
-export interface ToneMatrixRdx {
+export interface ToneMatrix {
     notes: Beat[]
 }
 

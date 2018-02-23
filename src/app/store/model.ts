@@ -1,5 +1,5 @@
-import { IMatrixState } from "../matrix/reducer";
+import { IToneMatrixState } from "../matrix/reducer";
 
 export interface IAppState {
-    toneMatrix?: IMatrixState
+    toneMatrix?: IToneMatrixState
 }

@@ -6,9 +6,9 @@ import { AudioContextService } from '../audio/audio-context.service';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../store/model';
 import { ToneMatrixActions } from '../matrix/actions';
-import { IMatrixState } from '../matrix/reducer';
+import { IToneMatrixState } from '../matrix/reducer';
 import { Beat } from '../matrix/tone-matrix-rdx';
-import { MatrixLoopService } from '../audio/matrix-loop.service';
+import { MatrixLoopService } from '../matrix/matrix-loop.service';
 
 @Component({
   selector: 'app-soundtest',

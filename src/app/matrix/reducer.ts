@@ -1,17 +1,17 @@
 import { Action } from 'redux';
 import { ToneMatrixActions, ToneMatrixAction } from './actions';
-import { ToneMatrixRdx, Beat } from './tone-matrix-rdx';
+import { ToneMatrix, Beat } from './tone-matrix-rdx';
 import { Observable } from 'rxjs/Rx';
 
-export interface IMatrixState {
-    matrix: ToneMatrixRdx,
+export interface IToneMatrixState {
+    matrix: ToneMatrix,
     beat: number,
     numBeats: number,
     availableNotes: string[],
     time: number
 }
 
-export const INITIAL_STATE: IMatrixState = {
+export const INITIAL_STATE: IToneMatrixState = {
     matrix: {notes: [{}]},
     beat: 1,
     numBeats: 2,
@@ -19,7 +19,7 @@ export const INITIAL_STATE: IMatrixState = {
     time: 0
 };
 
-export function matrixReducer(lastState: IMatrixState = INITIAL_STATE, action: ToneMatrixAction): IMatrixState {
+export function matrixReducer(lastState: IToneMatrixState = INITIAL_STATE, action: ToneMatrixAction): IToneMatrixState {
     switch (action.type) {
         case ToneMatrixActions.TOGGLE_NOTE:  
             return { 

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AudioContextService } from './audio-context.service';
+import { AudioContextService } from '../audio/audio-context.service';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/model';
 import { ToneMatrixActions } from '../matrix/actions';
-import { NoteHz } from './noteHz';
-import { Note } from './note';
+import { NoteHz } from '../audio/noteHz';
+import { Note } from '../audio/note';
 import { Observable } from 'rxjs/Rx';
 import { Beat } from '../matrix/tone-matrix-rdx';
 
