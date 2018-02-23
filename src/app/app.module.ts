@@ -5,7 +5,6 @@ import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { AppComponent } from './app.component';
 import { SoundtestComponent } from './soundtest/soundtest.component';
 import { AudioContextService } from './audio/audio-context.service';
-import { BeatService } from './audio/beat.service';
 import { MatrixModule } from './matrix/matrix.module';
 import { StoreModule } from './store/store.module';
 
@@ -21,7 +20,7 @@ import { StoreModule } from './store/store.module';
     MatrixModule,
     StoreModule
   ],
-  providers: [AudioContextService, BeatService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
