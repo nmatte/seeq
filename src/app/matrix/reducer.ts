@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { ToneMatrixActions, ToneMatrixAction } from './actions';
-import { ToneMatrix, Beat } from './tone-matrix-rdx';
+import { ToneMatrix, Beat } from './tone-matrix';
 import { Observable } from 'rxjs/Rx';
 
 export interface IToneMatrixState {

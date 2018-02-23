@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SoundtestComponent } from './soundtest.component';
+import { ToneMatrixViewComponent } from './tone-matrix-view.component';
 
 describe('SoundtestComponent', () => {
-  let component: SoundtestComponent;
-  let fixture: ComponentFixture<SoundtestComponent>;
+  let component: ToneMatrixViewComponent;
+  let fixture: ComponentFixture<ToneMatrixViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SoundtestComponent ]
+      declarations: [ ToneMatrixViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SoundtestComponent);
+    fixture = TestBed.createComponent(ToneMatrixViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

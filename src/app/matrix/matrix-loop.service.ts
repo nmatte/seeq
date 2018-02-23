@@ -6,7 +6,7 @@ import { ToneMatrixActions } from '../matrix/actions';
 import { NoteHz } from '../audio/noteHz';
 import { Note } from '../audio/note';
 import { Observable } from 'rxjs/Rx';
-import { Beat } from '../matrix/tone-matrix-rdx';
+import { Beat } from '../matrix/tone-matrix';
 
 @Injectable()
 export class MatrixLoopService {

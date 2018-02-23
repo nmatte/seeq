@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from '../audio/note';
-import { NoteHz } from '../audio/noteHz';
+import { Note } from '../../audio/note';
+import { NoteHz } from '../../audio/noteHz';
 import { Observable } from 'rxjs/Rx';
-import { AudioContextService } from '../audio/audio-context.service';
+import { AudioContextService } from '../../audio/audio-context.service';
 import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from '../store/model';
-import { ToneMatrixActions } from '../matrix/actions';
-import { IToneMatrixState } from '../matrix/reducer';
-import { Beat } from '../matrix/tone-matrix-rdx';
-import { MatrixLoopService } from '../matrix/matrix-loop.service';
+import { IAppState } from '../../store/model';
+import { ToneMatrixActions } from '../actions';
+import { IToneMatrixState } from '../reducer';
+import { Beat } from '../tone-matrix';
+import { MatrixLoopService } from '../matrix-loop.service';
 
 @Component({
-  selector: 'app-soundtest',
-  templateUrl: './soundtest.component.html',
-  styleUrls: ['./soundtest.component.css']
+  selector: 'app-tone-matrix-view',
+  templateUrl: './tone-matrix-view.component.html',
+  styleUrls: ['./tone-matrix-view.component.css']
 })
-export class SoundtestComponent implements OnInit {
+export class ToneMatrixViewComponent implements OnInit {
 
   gain: GainNode;
   audioCtx: AudioContext;
