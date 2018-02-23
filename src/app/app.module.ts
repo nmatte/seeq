@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { AudioContextService } from './audio/audio-context.service';
 import { MatrixModule } from './matrix/matrix.module';
 import { StoreModule } from './store/store.module';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
