@@ -1,20 +1,24 @@
-.beat-header {
-    color: red;
-}
-
-.beat-cell {
-    outline: none;
-    border: none;
-    color: black;
-    background-color: dodgerblue;
-    padding-left: 20px;
-}
-
-.beat-cell--active {
-    background-color: blue;
-    color: white;
-}
-
-.matrix-table {
+.matrix {
     margin: auto;
+    width: 80%;
+}
+
+.matrix__col {
+    display: inline-block;
+}
+
+.matrix__col__cell {
+    display: block;
+    min-height: 10px;
+    margin: 5px;
+    background-color: lightblue;
+    /* border: 1px solid black; */
+}
+
+.matrix__col__cell--active {
+    background-color: white;
+}
+
+.matrix__col__cell--enabled {
+    background-color: dodgerblue;
 }

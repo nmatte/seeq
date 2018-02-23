@@ -5,20 +5,19 @@ import { Observable } from 'rxjs/Rx';
 
 export interface IMatrixState {
     matrix: ToneMatrixRdx,
-    beat: number
+    beat: number,
+    numBeats: number,
+    availableNotes: string[],
+    time: number
 }
 
 export const INITIAL_STATE: IMatrixState = {
     matrix: {notes: [{}]},
-    beat: 1
+    beat: 1,
+    numBeats: 2,
+    availableNotes: ['A4'],
+    time: 0
 };
-
-function toggleNoteForBeat (beat: Beat, note: string): Beat {
-    let newBeat: Beat = {...beat};
-    newBeat[note] = !beat[note];
-    return newBeat;
-}
-
 
 export function matrixReducer(lastState: IMatrixState = INITIAL_STATE, action: ToneMatrixAction): IMatrixState {
     switch (action.type) {
@@ -28,7 +27,9 @@ export function matrixReducer(lastState: IMatrixState = INITIAL_STATE, action: T
                 matrix: {
                     notes: lastState.matrix.notes.map((beat: Beat, index: number) => {
                         if (action.payload.beat === index + 1) {
-                            return toggleNoteForBeat(beat, action.payload.note)
+                            let newBeat: Beat = {...beat};
+                            newBeat[action.payload.note] = !beat[action.payload.note];
+                            return newBeat;
                         }
                         return {...beat};
                     })
@@ -37,10 +38,16 @@ export function matrixReducer(lastState: IMatrixState = INITIAL_STATE, action: T
         case ToneMatrixActions.INIT_MATRIX:
             let newState = {
                 ...lastState,
+                availableNotes: action.payload.notes,
+                numBeats: action.payload.numBeats,
                 matrix: {notes: []}
             };
             for (let i = 0; i < action.payload.numBeats; i++) {
-                newState.matrix.notes.push({});
+                let newBeat: Beat = {};
+                action.payload.notes.forEach(note => {
+                    newBeat[note] = false;
+                })
+                newState.matrix.notes.push(newBeat);
             }
             return newState;
         case ToneMatrixActions.PLAY_BEAT:
@@ -53,6 +60,11 @@ export function matrixReducer(lastState: IMatrixState = INITIAL_STATE, action: T
             return {
                 ...lastState,
                 beat: lastState.beat + 1
+            }
+        case ToneMatrixActions.RECORD_BEAT:
+            return {
+                ...lastState,
+                time: action.payload.time
             }
     }
 

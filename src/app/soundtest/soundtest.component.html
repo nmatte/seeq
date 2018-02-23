@@ -1,15 +1,17 @@
-<table class="matrix-table">
-  <tr>
-    <th></th>
-    <th *ngFor="let col of toneMatrix.cols" 
-        [ngClass]="{'beat-header': beat === col}">{{col}}</th>
-  </tr>
-  <tr *ngFor="let note of toneMatrix.notes">
-    <th>{{note}}</th>
-    <td *ngFor="let col of toneMatrix.cols">
-      <span (click)="matrixToggle(note, col)" 
-      class="beat-cell"
-      [ngClass]="{'beat-cell--active': isEnabled(note, col)}">&nbsp;</span>
-    </td>
-  </tr>                       
-</table>
+<section class="matrix">
+  <div class="matrix__col" 
+       *ngFor="let beat of notes$ | async; let i = index">
+       <span class="matrix__col__cell" 
+             [ngClass]="{
+               'matrix__col__cell--active': activeBeat === (i + 1),
+               'matrix__col__cell--enabled': beat[note]
+              }"
+             *ngFor="let note of availableNotes"
+            (click)="matrixToggle(note, i)">
+            {{i}}
+       </span>
+  </div>
+  {{activeBeat}}
+  <br>
+</section>
+       
