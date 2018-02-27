@@ -19,7 +19,7 @@ export const INITIAL_STATE: IToneMatrixState = {
     time: 0
 };
 
-export function matrixReducer(lastState: IToneMatrixState = INITIAL_STATE, action: ToneMatrixAction): IToneMatrixState {
+export function toneMatrixReducer(lastState: IToneMatrixState = INITIAL_STATE, action: ToneMatrixAction): IToneMatrixState {
     switch (action.type) {
         case ToneMatrixActions.TOGGLE_NOTE:  
             return { 

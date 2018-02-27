@@ -20,11 +20,11 @@ export class MatrixLoopService {
               private matrixActions: ToneMatrixActions) { }
 
   start() {
-    this.ngRedux.select<number>(['matrixReducer', 'time'])
+    this.ngRedux.select<number>(['toneMatrix', 'time'])
       .subscribe(lastRecordedBeat => this.lastRecordedBeat = lastRecordedBeat);
-    this.ngRedux.select<Beat[]>(['matrixReducer', 'matrix', 'notes'])
+    this.ngRedux.select<Beat[]>(['toneMatrix', 'matrix', 'notes'])
       .subscribe(beats => this.beats = beats);
-    this.ngRedux.select<number>(['matrixReducer', 'beat'])
+    this.ngRedux.select<number>(['toneMatrix', 'beat'])
       .subscribe(activeBeat => this.activeBeat = activeBeat);
 
     this.ngRedux.dispatch(this.matrixActions.recordBeat());

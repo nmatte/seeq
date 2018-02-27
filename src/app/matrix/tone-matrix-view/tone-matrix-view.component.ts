@@ -21,10 +21,10 @@ export class ToneMatrixViewComponent implements OnInit {
   audioCtx: AudioContext;
 
   beatActive: boolean;
-  @select(['matrixReducer', 'matrix', 'notes']) readonly notes$: Observable<Beat[]>;
-  @select(['matrixReducer', 'time']) readonly lastBeatTime$: Observable<number>;
-  @select(['matrixReducer', 'availableNotes']) readonly availableNotes$: Observable<string[]>;
-  @select(['matrixReducer', 'beat']) readonly activeBeat$: Observable<number>;
+  @select(['toneMatrix', 'matrix', 'notes']) readonly notes$: Observable<Beat[]>;
+  @select(['toneMatrix', 'time']) readonly lastBeatTime$: Observable<number>;
+  @select(['toneMatrix', 'availableNotes']) readonly availableNotes$: Observable<string[]>;
+  @select(['toneMatrix', 'beat']) readonly activeBeat$: Observable<number>;
   activeBeat: number;
   availableNotes: string[];
   lastRecordedBeat: number;
