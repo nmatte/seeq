@@ -1,6 +1,8 @@
 .matrix {
-    margin: auto;
-    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .matrix__col {
@@ -16,7 +18,7 @@
 }
 
 .matrix__col__cell--active {
-    background-color: white;
+    background-color: #ddd;
 }
 
 .matrix__col__cell--enabled {
