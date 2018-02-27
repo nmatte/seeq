@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToneMatrixViewComponent } from './tone-matrix-view.component';
 
-describe('SoundtestComponent', () => {
+describe('ToneMatrixViewComponent', () => {
   let component: ToneMatrixViewComponent;
   let fixture: ComponentFixture<ToneMatrixViewComponent>;
 
