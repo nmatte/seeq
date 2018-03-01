@@ -1,0 +1,26 @@
+.matrix {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.matrix__col {
+    display: inline-block;
+}
+
+.matrix__col__cell {
+    display: block;
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+    background-color: lightblue
+}
+
+.matrix__col__cell--active {
+    background-color: #ddd;
+}
+
+.matrix__col__cell--enabled {
+    background-color: dodgerblue;
+}
