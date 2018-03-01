@@ -4,7 +4,7 @@ import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/model';
 import { ToneMatrixActions } from '../matrix/actions';
 import { NoteHz } from '../audio/noteHz';
-import { Note } from '../audio/note';
+import { NoteParams, NoteService } from '../audio/noteService';
 import { Observable } from 'rxjs/Rx';
 import { Beat } from '../matrix/tone-matrix';
 
@@ -16,6 +16,7 @@ export class MatrixLoopService {
   activeBeat: number;
 
   constructor(private audioContextService: AudioContextService,
+              private noteService: NoteService,
               private ngRedux: NgRedux<IAppState>,
               private matrixActions: ToneMatrixActions) { }
 
@@ -40,7 +41,11 @@ export class MatrixLoopService {
             Observable.from(Object.keys(notes))
               .filter(note => !!notes[note])
               .do(note => {
-                new Note(NoteHz[note], 'sine', 0.5).play(this.audioContextService.getAudioContext());
+                this.noteService.play(this.audioContextService.getAudioContext(), {
+                  noteHz: NoteHz[note], 
+                  waveType: 'sine',
+                  duration: 0.5
+                });
               })
               .subscribe();
         }
