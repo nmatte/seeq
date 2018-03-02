@@ -14,6 +14,8 @@ export class MatrixLoopService {
   lastRecordedBeat: number;
   beats: Beat[];
   activeBeat: number;
+  private active: boolean;
+  private intervalId: number;
 
   constructor(private audioContextService: AudioContextService,
               private noteService: NoteService,
@@ -21,6 +23,7 @@ export class MatrixLoopService {
               private matrixActions: ToneMatrixActions) { }
 
   start() {
+    this.active = true;
     this.ngRedux.select<number>(['toneMatrix', 'time'])
       .subscribe(lastRecordedBeat => this.lastRecordedBeat = lastRecordedBeat);
     this.ngRedux.select<Beat[]>(['toneMatrix', 'matrix', 'notes'])
@@ -53,11 +56,17 @@ export class MatrixLoopService {
       }
     };
     
-    setInterval(doOnInterval, 5);
+    this.intervalId = window.setInterval(doOnInterval, 5);
+  }
+
+  isActive(): boolean {
+    return this.active;
   }
 
   stop() {
-
+    window.clearInterval(this.intervalId);
+    this.intervalId = undefined;
+    this.active =  false;
   }
 
 }

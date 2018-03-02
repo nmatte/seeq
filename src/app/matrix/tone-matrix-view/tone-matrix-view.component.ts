@@ -19,7 +19,6 @@ export class ToneMatrixViewComponent implements OnInit {
   gain: GainNode;
   audioCtx: AudioContext;
 
-  beatActive: boolean;
   @select(['toneMatrix', 'matrix', 'notes']) readonly notes$: Observable<Beat[]>;
   @select(['toneMatrix', 'time']) readonly lastBeatTime$: Observable<number>;
   @select(['toneMatrix', 'availableNotes']) readonly availableNotes$: Observable<string[]>;
@@ -49,13 +48,9 @@ export class ToneMatrixViewComponent implements OnInit {
 
   matrixToggle(note: string, index: number): void {
     this.ngRedux.dispatch(this.actions.toggleNote(note, index + 1));
-    if (!this.beatActive) {
-      this.beatActive = true;
-
+    if (!this.matrixLoop.isActive()) {
       this.ngRedux.dispatch(this.actions.recordBeat());
-      
       this.matrixLoop.start();
-
     }
   }
 
