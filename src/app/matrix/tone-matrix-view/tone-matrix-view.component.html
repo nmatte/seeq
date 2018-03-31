@@ -3,10 +3,10 @@
        *ngFor="let beat of notes$ | async; let i = index">
        <span class="matrix__col__cell" 
              [ngClass]="{
-               'matrix__col__cell--active': activeBeat === (i + 1),
+               'matrix__col__cell--active': (activeBeat$ | async)=== (i + 1),
                'matrix__col__cell--enabled': beat[note]
               }"
-             *ngFor="let note of availableNotes"
+             *ngFor="let note of (availableNotes$ | async)"
             (click)="matrixToggle(note, i)">
        </span>
   </div>
